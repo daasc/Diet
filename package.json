@@ -13,12 +13,13 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run lint"
+   "*.js": [
+    "npm run lint"
     ],
-    "*.vue": [
+   "*.vue": [
       "npm run lint"
-    ]
+  ]
+
   },
   "dependencies": {
     "pinia": "^2.0.26",
