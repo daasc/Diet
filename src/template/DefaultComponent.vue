@@ -19,6 +19,7 @@ const menuComponent = defineAsyncComponent(() =>
   height: 90vh;
   margin: 0 auto;
   display: flex;
+  background-color: $color-container;
   nav {
     width: 10%;
   }

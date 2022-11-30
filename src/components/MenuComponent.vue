@@ -1,9 +1,16 @@
 <template>
   <nav class="navbar">
     <div class="menu">
-      <div class="item">Home</div>
-      <div class="item">Calender</div>
-      <div class="item">Settings</div>
+      <div>LOGO</div>
+      <div class="item active">
+        <img src="../assets/images/home.png" alt="home" />
+      </div>
+      <div class="item">
+        <img src="../assets/images/calendar.png" alt="home" />
+      </div>
+      <div class="item">
+        <img src="../assets/images/settings.png" alt="home" />
+      </div>
     </div>
     <div class="item">Profile</div>
   </nav>
@@ -14,10 +21,26 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0 auto;
-  background: red;
+  background: $color-menu;
   .menu {
     color: green;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    .item {
+      width: 40px;
+      height: 40px;
+      padding: 10px;
+      &.active {
+        border: 2px solid black;
+        border-radius: 8px;
+      }
+      cursor: pointer;
+      img {
+        width: 100%;
+      }
+    }
   }
 }
 </style>
