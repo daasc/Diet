@@ -1,5 +1,8 @@
 <template>
-  <div><h2>Home</h2></div>
+  <div>
+    fasfasdf
+  </div>
 </template>
-<script setup></script>
+<script setup>
+</script>
 <style></style>
