@@ -18,7 +18,6 @@
   background: red;
   .menu {
     color: green;
-
   }
 }
 </style>

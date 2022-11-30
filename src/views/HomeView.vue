@@ -1,8 +1,5 @@
 <template>
-  <div>
-    fasfasdf
-  </div>
+  <div>fasfasdf</div>
 </template>
-<script setup>
-</script>
+<script setup></script>
 <style></style>
