@@ -6,20 +6,20 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "test": "vitest run --coverage",
     "test:unit": "vitest --environment jsdom --root src/",
     "test:e2e": "start-server-and-test preview :4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' :4173 'cypress open --e2e'",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "lint-staged": "lint-staged"
+    "prepare": "husky install"
   },
   "lint-staged": {
-   "*.js": [
-    "npm run lint"
-    ],
-   "*.vue": [
+    "*.js": [
       "npm run lint"
-  ]
-
+    ],
+    "*.vue": [
+      "npm run lint"
+    ]
   },
   "dependencies": {
     "pinia": "^2.0.26",
@@ -31,6 +31,7 @@
     "@rushstack/eslint-patch": "^1.1.4",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vitejs/plugin-vue-jsx": "^2.1.1",
+    "@vitest/coverage-c8": "^0.25.3",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/test-utils": "^2.2.4",
     "cypress": "^11.2.0",
