@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="menu">
       <div>LOGO</div>
-      <div class="item active">
+      <div class="item" :class="{ active: homeIsActive }" @click="goHome()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="35"
@@ -16,7 +16,11 @@
           />
         </svg>
       </div>
-      <div class="item active">
+      <div
+        class="item"
+        :class="{ active: calendarIsActive }"
+        @click="goCalendar()"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           data-name="Layer 1"
@@ -28,10 +32,38 @@
         </svg>
       </div>
     </div>
-    <div class="item">Profile</div>
+    <div class="item">Perfil</div>
   </nav>
 </template>
-<script setup></script>
+<script>
+import { ref } from "vue";
+
+export default {
+  setup() {
+    const active = ref(false);
+    return {
+      active,
+    };
+  },
+
+  computed: {
+    calendarIsActive() {
+      return this.$route?.path === "/calendar";
+    },
+    homeIsActive() {
+      return this.$route?.path === "/";
+    },
+  },
+  methods: {
+    goHome() {
+      this.$router.push({ path: "/", name: "Home" });
+    },
+    goCalendar() {
+      this.$router.push({ path: "/calendar", name: "Calendar" });
+    },
+  },
+};
+</script>
 <style scoped lang="scss">
 .navbar {
   display: flex;
@@ -51,10 +83,11 @@
       &.active {
         border: 2px solid black;
         border-radius: 8px;
+        background-color: $color-menu-active;
+        fill: white;
       }
       cursor: pointer;
       path {
-        fill: red;
         width: 100%;
         margin: 0 auto;
       }
