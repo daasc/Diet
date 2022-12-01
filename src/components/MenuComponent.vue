@@ -58,7 +58,7 @@ import { ref } from "vue";
 export default {
   setup() {
     const active = ref(false);
-    const path = ref("/");
+    const path = ref("");
     return {
       active,
       path,
@@ -67,10 +67,10 @@ export default {
 
   computed: {
     calendarIsActive() {
-      return this.path === "/calendar";
+      return this.path === "/calendar" || this.$route?.path === "/calendar";
     },
     homeIsActive() {
-      return this.path === "/";
+      return this.path === "/" || this.$route?.path === "/";
     },
   },
   methods: {
@@ -211,7 +211,7 @@ nav {
   .menu {
     position: absolute;
     width: 180px;
-    height: 100vh;
+    height: 100vh !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
