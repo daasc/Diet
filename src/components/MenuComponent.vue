@@ -97,24 +97,36 @@ nav {
     background-color: $color-menu;
     height: 90vh;
     gap: 50px;
-
-    .item {
-      width: 40px;
-      height: 40px;
-      padding: 10px;
-      &.active {
-        border: 2px solid black;
-        border-radius: 8px;
-        background-color: $color-menu-active;
-        fill: white;
-      }
-      cursor: pointer;
-      path {
-        width: 100%;
-        margin: 0 auto;
-      }
-      svg {
-        width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    .navigation {
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      height: 80%;
+      .items {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        .item {
+          width: 40px;
+          height: 40px;
+          padding: 10px;
+          &.active {
+            border: 2px solid black;
+            border-radius: 8px;
+            background-color: $color-menu-active;
+            fill: white;
+          }
+          cursor: pointer;
+          path {
+            width: 100%;
+            margin: 0 auto;
+          }
+          svg {
+            width: 100%;
+          }
+        }
       }
     }
   }
