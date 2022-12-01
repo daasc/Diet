@@ -3,4 +3,10 @@
   <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped>
+.master {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+</style>
