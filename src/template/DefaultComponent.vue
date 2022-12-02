@@ -41,16 +41,16 @@ const menuComponent = defineAsyncComponent(() =>
     justify-content: center;
     height: 100vh;
     .container {
-      width: 90%;
-      height: 90vh;
+      width: 100%;
+      height: 100vh;
       margin: 0 auto;
       display: flex;
       background-color: $color-container;
       nav {
-        width: 10%;
+        width: 6%;
       }
       main {
-        width: 90%;
+        width: 94%;
         padding: 10px;
       }
     }

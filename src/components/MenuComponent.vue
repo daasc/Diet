@@ -95,7 +95,7 @@ nav {
     display: flex;
     flex-direction: column;
     background-color: $color-menu;
-    height: 90vh;
+    height: 100vh;
     gap: 50px;
     align-items: center;
     justify-content: space-between;
