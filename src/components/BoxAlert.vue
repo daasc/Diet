@@ -46,7 +46,7 @@ export default {
 .box {
   position: relative;
   width: 90%;
-  height: 70%;
+  height: 90px;
   background-color: v-bind(color);
   border-radius: 8px;
   margin: 0 auto;
