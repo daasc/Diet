@@ -53,18 +53,13 @@
   </nav>
 </template>
 <script>
-import { ref } from "vue";
-
 export default {
-  setup() {
-    const active = ref(false);
-    const path = ref("");
+  data() {
     return {
-      active,
-      path,
+      active: false,
+      path: "",
     };
   },
-
   computed: {
     calendarIsActive() {
       return this.path === "/calendar" || this.$route?.path === "/calendar";

@@ -19,45 +19,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>ddasdasd</td>
-            <td><BoxAlert></BoxAlert></td>
-            <td><BoxAlert></BoxAlert></td>
-            <td><BoxAlert></BoxAlert></td>
-            <td><BoxAlert></BoxAlert></td>
-            <td><BoxAlert></BoxAlert></td>
-            <td><BoxAlert></BoxAlert></td>
-            <td><BoxAlert></BoxAlert></td>
-          </tr>
-          <tr>
-            <td>adad</td>
-            <td>dasdasd</td>
-            <td>dsada</td>
-            <td>sads;</td>
-            <td>dasda</td>
-            <td>adsadsa</td>
-            <td>adad</td>
-            <td>adasd</td>
-          </tr>
-          <tr>
-            <td>dasda</td>
-            <td>adsadsa</td>
-            <td>adad</td>
-            <td>adasd</td>
-            <td>dasda</td>
-            <td>adsadsa</td>
-            <td>adad</td>
-            <td>adasd</td>
-          </tr>
-          <tr>
-            <td>dasda</td>
-            <td>adsadsa</td>
-            <td>adad</td>
-            <td>adasd</td>
-            <td>dasda</td>
-            <td>adsadsa</td>
-            <td>adad</td>
-            <td>adasd</td>
+          <tr v-for="(diet, key) in calendar" :key="key">
+            <td>{{ key }}</td>
+            <td v-for="(item, index) in diet" :key="index">
+              <BoxAlert
+                :color="item.color"
+                :text="item.text"
+                :description="item.description"
+                :hour="item.hour"
+                :recipe="item.recipe"
+                :empty="item.empty"
+                :done="item.done"
+              ></BoxAlert>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -72,7 +46,92 @@ export default {
     BoxAlert: defineAsyncComponent(() => import("../components/BoxAlert.vue")),
   },
   data() {
-    return {};
+    return {
+      calendar: {
+        Breakfast: [
+          {
+            color: "#7789F2",
+            text: "breakfast",
+            hour: "9:00",
+            description: "in my breakfast i'll eat bread and banana",
+            recipe: "diet recipe",
+            empty: false,
+            done: false,
+          },
+          {
+            color: "#5FA3E8",
+            text: "breakfast",
+            hour: "9:00",
+            description: "in my breakfast i'll eat bread and banana",
+            recipe: "diet recipe",
+            empty: false,
+            done: false,
+          },
+          {
+            empty: true,
+          },
+          {
+            color: "#97D1DB",
+            text: "breakfast",
+            hour: "9:00",
+            description: "in my breakfast i'll eat bread and banana",
+            recipe: "diet recipe",
+            empty: false,
+            done: false,
+          },
+          {
+            color: "#D3F5B0",
+            text: "breakfast",
+            hour: "9:00",
+            description: "in my breakfast i'll eat bread and banana",
+            recipe: "diet recipe",
+            empty: false,
+            done: false,
+          },
+          {
+            color: "#EBB398",
+            text: "breakfast",
+            hour: "9:00",
+            description: "in my breakfast i'll eat bread and banana",
+            recipe: "diet recipe",
+            empty: false,
+            done: false,
+          },
+        ],
+        Snack: [
+          {
+            color: "#97D1DB",
+            text: "breakfast",
+            hour: "9:00",
+            description: "in my breakfast i'll eat bread and banana",
+            recipe: "diet recipe",
+            empty: false,
+            done: false,
+          },
+        ],
+        Lunch: [],
+        "Afternoon Snack": [
+          {
+            color: "#97D1DB",
+            text: "breakfast",
+            hour: "9:00",
+            description: "in my breakfast i'll eat bread and banana",
+            recipe: "diet recipe",
+            empty: false,
+            done: false,
+          },
+          {
+            color: "#97D1DB",
+            text: "breakfast",
+            hour: "9:00",
+            description: "in my breakfast i'll eat bread and banana",
+            recipe: "diet recipe",
+            empty: false,
+            done: false,
+          },
+        ],
+      },
+    };
   },
 };
 </script>
@@ -89,10 +148,14 @@ table {
   th {
     border-bottom: 1px solid #e8e9eb;
     padding: 5px;
+    width: 10%;
     color: #c9d4d8;
 
     &.active {
       color: #313030;
+    }
+    &:first-child {
+      width: 5%;
     }
   }
   td {
@@ -100,10 +163,10 @@ table {
     height: 120px;
     color: #313030;
     width: 10%;
-  }
-  td:first-child {
-    border-right: 1px solid #e8e9eb;
-    width: 5%;
+    &:first-child {
+      border-right: 1px solid #e8e9eb;
+      width: 5%;
+    }
   }
 }
 </style>
