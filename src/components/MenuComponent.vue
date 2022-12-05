@@ -53,18 +53,13 @@
   </nav>
 </template>
 <script>
-import { ref } from "vue";
-
 export default {
-  setup() {
-    const active = ref(false);
-    const path = ref("");
+  data() {
     return {
-      active,
-      path,
+      active: false,
+      path: "",
     };
   },
-
   computed: {
     calendarIsActive() {
       return this.path === "/calendar" || this.$route?.path === "/calendar";
@@ -95,7 +90,7 @@ nav {
     display: flex;
     flex-direction: column;
     background-color: $color-menu;
-    height: 90vh;
+    height: 100vh;
     gap: 50px;
     align-items: center;
     justify-content: space-between;
