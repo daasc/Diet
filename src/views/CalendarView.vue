@@ -20,7 +20,12 @@
         </thead>
         <tbody>
           <tr v-for="(diet, key) in calendar" :key="key">
-            <td>{{ key }}</td>
+            <td>
+              <MealComponent
+                :name="key"
+                :color="diet[0] ? diet[0][0].color : '#8ecae6'"
+              ></MealComponent>
+            </td>
             <td v-for="(items, index) in diet" :key="index">
               <div class="items">
                 <BoxAlert
@@ -48,12 +53,24 @@ export default {
   name: "CalendarView",
   components: {
     BoxAlert: defineAsyncComponent(() => import("../components/BoxAlert.vue")),
+    MealComponent: defineAsyncComponent(() =>
+      import("../components/MealComponent.vue")
+    ),
   },
   data() {
     return {
       calendar: {
         Breakfast: [
           [
+            {
+              color: "#7789F2",
+              text: "breakfast",
+              hour: "9:00",
+              description: "in my breakfast i'll eat bread and banana",
+              recipe: "diet recipe",
+              empty: false,
+              done: false,
+            },
             {
               color: "#7789F2",
               text: "breakfast",
@@ -161,6 +178,30 @@ export default {
             },
           ],
         ],
+        Dinner: [
+          [
+            {
+              color: "#97D1DB",
+              text: "breakfast",
+              hour: "9:00",
+              description: "in my breakfast i'll eat bread and banana",
+              recipe: "diet recipe",
+              empty: false,
+              done: false,
+            },
+          ],
+          [
+            {
+              color: "#97D1DB",
+              text: "breakfast",
+              hour: "9:00",
+              description: "in my breakfast i'll eat bread and banana",
+              recipe: "diet recipe",
+              empty: false,
+              done: false,
+            },
+          ],
+        ],
       },
       week: [],
     };
@@ -193,42 +234,51 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+section {
+  max-height: 100vh;
+  overflow: scroll;
+}
 .description {
   display: flex;
   justify-content: space-between;
   margin-bottom: 50px;
 }
-table {
-  border-collapse: collapse;
-  padding: 5px;
-  width: 100%;
-  th {
-    border-bottom: 1px solid #e8e9eb;
+.content {
+  table {
+    border-collapse: collapse;
     padding: 5px;
-    width: 10%;
-    color: #c9d4d8;
+    width: 100%;
+    th {
+      border-bottom: 1px solid #e8e9eb;
+      padding: 5px;
+      width: 10%;
+      color: #c9d4d8;
 
-    &.active {
+      &.active {
+        color: #313030;
+      }
+      &:first-child {
+        width: 5%;
+      }
+    }
+    td {
+      border-bottom: 1px solid #e8e9eb;
+      height: 120px;
       color: #313030;
-    }
-    &:first-child {
-      width: 5%;
-    }
-  }
-  td {
-    border-bottom: 1px solid #e8e9eb;
-    height: 120px;
-    color: #313030;
-    width: 10%;
-    padding: 3px 0;
-    .items {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    &:first-child {
-      border-right: 1px solid #e8e9eb;
-      width: 5%;
+      width: 10%;
+      padding: 3px 0;
+      .items {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-height: 200px;
+        overflow: scroll;
+        overflow-x: hidden;
+      }
+      &:first-child {
+        border-right: 1px solid #e8e9eb;
+        width: 5%;
+      }
     }
   }
 }

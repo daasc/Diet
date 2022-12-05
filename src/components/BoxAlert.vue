@@ -47,6 +47,7 @@ export default {
   position: relative;
   width: 90%;
   height: 90px;
+  min-height: 90px;
   background-color: v-bind(color);
   border-radius: 8px;
   margin: 0 auto;
