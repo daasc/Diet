@@ -1,10 +1,10 @@
 <template>
   <section>
-    <h1>Create Calendar</h1>
+    <h1>Create Meal</h1>
     <form action="">
       <label for="week">
         Choose the day
-        <select name="week" id="week">
+        <select name="week" id="week" required>
           <option value="" disabled selected>select the day</option>
           <option value="monday">Monday</option>
           <option value="tuesday">Tuesday</option>
@@ -15,9 +15,13 @@
           <option value="sunday">Sunday</option>
         </select>
       </label>
+      <label for="time">
+        Choose the hour
+        <input type="time" id="time" min="04:00" max="18:00" required />
+      </label>
       <label for="meal">
         Choose the meal
-        <select name="meal" id="meal">
+        <select name="meal" id="meal" required>
           <option value="" disabled selected>select the meal</option>
           <option value="Breakfast">Breakfast</option>
           <option value="Snack">Snack</option>
@@ -28,24 +32,21 @@
       </label>
       <label for="color">
         Card color
-        <input type="color" name="" id="color" />
+        <input type="color" name="" id="color" required />
       </label>
       <label for="">
         Nome *
-        <input type="text" placeholder="" />
+        <input type="text" placeholder="Name" required />
       </label>
       <label for="">
         Description *
-        <input type="text" placeholder="Description" />
+        <input type="text" placeholder="Description" required />
       </label>
       <label for="">
         Recipe *
-        <input type="text" placeholder="Recipe" />
+        <input type="text" placeholder="Recipe" required />
       </label>
-      <label for="">
-        Nome *
-        <input type="text" placeholder="" />
-      </label>
+      <button class="button" role="button">Save</button>
     </form>
   </section>
 </template>
@@ -55,19 +56,27 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+h1 {
+  text-align: center;
+}
 form {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  gap: 10px;
+  gap: 20px;
   width: 60%;
   min-height: 70vh;
   padding: 10px;
   background: #fff;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
   label {
-    input[type="text"] {
-      color: rgba(28, 9, 80, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    input[type="text"],
+    input[type="time"],
+    select {
+      color: rgba(15, 15, 15, 0.75);
       background: #f3f2f6;
       border: 2px solid #f3f2f6;
       font-size: 16px;
