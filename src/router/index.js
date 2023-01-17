@@ -18,6 +18,11 @@ const router = createRouter({
           path: "/calendar",
           component: () => import("../views/CalendarView.vue"),
         },
+        {
+          name: "Create calendar",
+          path: "create-calendar",
+          component: () => import("../views/CreateCalendarView.vue"),
+        },
       ],
     },
   ],

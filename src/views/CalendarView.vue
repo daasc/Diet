@@ -2,7 +2,13 @@
   <section>
     <div class="description">
       <h3>Calendar</h3>
-      <button class="bn632-hover bn26">Create Calendar</button>
+      <!-- <router-link class="bn632-hover bn26" to="/create-calendar"></router-link> -->
+      <button
+        @click="this.$router?.push('/create-calendar')"
+        class="bn632-hover bn26"
+      >
+        Create Calendar
+      </button>
     </div>
     <div class="content" style="overflow-x: auto">
       <table>
