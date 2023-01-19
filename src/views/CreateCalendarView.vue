@@ -53,6 +53,19 @@
 <script>
 export default {
   name: "CreateCalendar",
+  data() {
+    return {
+      meal: {
+        color: "",
+        name: "",
+        hour: "",
+        description: "",
+        recipe: "",
+        empty: false,
+        done: false,
+      },
+    };
+  },
 };
 </script>
 <style lang="scss" scoped>
