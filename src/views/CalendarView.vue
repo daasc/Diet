@@ -2,9 +2,15 @@
   <section>
     <div class="description">
       <h3>Calendar</h3>
-      <button class="bn632-hover bn26">Create Calendar</button>
+      <!-- <router-link class="bn632-hover bn26" to="/create-calendar"></router-link> -->
+      <button
+        @click="this.$router?.push('/create-calendar')"
+        class="bn632-hover bn26"
+      >
+        Create Calendar
+      </button>
     </div>
-    <div class="content" style="overflow-x: auto">
+    <div v-if="calendar" class="content" style="overflow-x: auto">
       <table>
         <thead>
           <tr>
@@ -32,7 +38,7 @@
                   v-for="(item, i) in items"
                   :key="i"
                   :color="item.color"
-                  :text="item.text"
+                  :text="item.name"
                   :description="item.description"
                   :hour="item.hour"
                   :recipe="item.recipe"
@@ -45,10 +51,14 @@
         </tbody>
       </table>
     </div>
+    <div v-else>
+      <h2>there is no calender</h2>
+    </div>
   </section>
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
+import axios from "../utils/axios.js";
 export default {
   name: "CalendarView",
   components: {
@@ -59,157 +69,25 @@ export default {
   },
   data() {
     return {
-      calendar: {
-        Breakfast: [
-          [
-            {
-              color: "#7789F2",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-            {
-              color: "#7789F2",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-            {
-              color: "#7789F2",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-          ],
-          [
-            {
-              color: "#5FA3E8",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-          ],
-          [
-            {
-              empty: true,
-            },
-          ],
-          [
-            {
-              color: "#97D1DB",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-          ],
-          [
-            {
-              color: "#D3F5B0",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-          ],
-          [
-            {
-              color: "#EBB398",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-          ],
-        ],
-        Snack: [
-          [
-            {
-              color: "#97D1DB",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-          ],
-        ],
-        Lunch: [],
-        "Afternoon Snack": [
-          [
-            {
-              color: "#97D1DB",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-          ],
-          [
-            {
-              color: "#97D1DB",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-          ],
-        ],
-        Dinner: [
-          [
-            {
-              color: "#97D1DB",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-          ],
-          [
-            {
-              color: "#97D1DB",
-              text: "breakfast",
-              hour: "9:00",
-              description: "in my breakfast i'll eat bread and banana",
-              recipe: "diet recipe",
-              empty: false,
-              done: false,
-            },
-          ],
-        ],
-      },
+      calendar: null,
       week: [],
     };
   },
-  created() {
+  async created() {
     this.dayOfTheWeek();
+    await this.getWeek();
   },
   methods: {
+    async getWeek() {
+      try {
+        const response = await axios.get("api/calender/week");
+        delete response.data[0]?.id;
+        this.calendar = response.data[0];
+        console.log("calendar: ", this.calendar);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     dayOfTheWeek() {
       let curr = new Date();
       let week = [
