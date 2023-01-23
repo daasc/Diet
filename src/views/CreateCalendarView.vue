@@ -4,24 +4,31 @@
     <form action="">
       <label for="week">
         Choose the day
-        <select name="week" id="week" required>
+        <select name="week" id="week" v-model="meal.day" required>
           <option value="" disabled selected>select the day</option>
-          <option value="monday">Monday</option>
-          <option value="tuesday">Tuesday</option>
-          <option value="wednesday">Wednesday</option>
-          <option value="thursday">Thursday</option>
-          <option value="friday">Friday</option>
-          <option value="saturday">Saturday</option>
-          <option value="sunday">Sunday</option>
+          <option value="0">Monday</option>
+          <option value="1">Tuesday</option>
+          <option value="2">Wednesday</option>
+          <option value="3">Thursday</option>
+          <option value="4">Friday</option>
+          <option value="5">Saturday</option>
+          <option value="6">Sunday</option>
         </select>
       </label>
       <label for="time">
         Choose the hour
-        <input type="time" id="time" min="04:00" max="18:00" required />
+        <input
+          type="time"
+          v-model="meal.hour"
+          id="time"
+          min="04:00"
+          max="18:00"
+          required
+        />
       </label>
       <label for="meal">
         Choose the meal
-        <select name="meal" id="meal" required>
+        <select name="meal" id="meal" v-model="meal.meal" required>
           <option value="" disabled selected>select the meal</option>
           <option value="Breakfast">Breakfast</option>
           <option value="Snack">Snack</option>
@@ -32,30 +39,51 @@
       </label>
       <label for="color">
         Card color
-        <input type="color" name="" id="color" required />
+        <input type="color" v-model="meal.color" name="" id="color" required />
       </label>
       <label for="">
         Nome *
-        <input type="text" placeholder="Name" required />
+        <input type="text" v-model="meal.name" placeholder="Name" required />
       </label>
       <label for="">
         Description *
-        <input type="text" placeholder="Description" required />
+        <input
+          type="text"
+          v-model="meal.description"
+          placeholder="Description"
+          required
+        />
       </label>
       <label for="">
         Recipe *
-        <input type="text" placeholder="Recipe" required />
+        <input
+          type="text"
+          v-model="meal.recipe"
+          placeholder="Recipe"
+          required
+        />
       </label>
-      <button class="button" role="button">Save</button>
+      <button
+        class="button"
+        type="submit"
+        role="button"
+        @click.prevent="storeMeal"
+      >
+        Save
+      </button>
     </form>
   </section>
 </template>
 <script>
+import axios from "../utils/axios";
 export default {
   name: "CreateCalendar",
   data() {
     return {
+      hasCalender: false,
       meal: {
+        meal: "",
+        day: 0,
         color: "",
         name: "",
         hour: "",
@@ -65,6 +93,15 @@ export default {
         done: false,
       },
     };
+  },
+  methods: {
+    async storeMeal() {
+      try {
+        await axios.post("api/calender/week", this.meal);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>

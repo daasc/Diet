@@ -10,7 +10,7 @@
         Create Calendar
       </button>
     </div>
-    <div class="content" style="overflow-x: auto">
+    <div v-if="calendar" class="content" style="overflow-x: auto">
       <table>
         <thead>
           <tr>
@@ -38,7 +38,7 @@
                   v-for="(item, i) in items"
                   :key="i"
                   :color="item.color"
-                  :text="item.text"
+                  :text="item.name"
                   :description="item.description"
                   :hour="item.hour"
                   :recipe="item.recipe"
@@ -50,6 +50,9 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div v-else>
+      <h2>there is no calender</h2>
     </div>
   </section>
 </template>
@@ -78,7 +81,9 @@ export default {
     async getWeek() {
       try {
         const response = await axios.get("api/calender/week");
+        delete response.data[0]?.id;
         this.calendar = response.data[0];
+        console.log("calendar: ", this.calendar);
       } catch (error) {
         console.log(error);
       }
