@@ -6,6 +6,7 @@
       :type="typeAlert"
     ></alert-component>
     <h1>Create Meal</h1>
+
     <form action="">
       <label for="week">
         Choose the day
@@ -92,7 +93,7 @@ export default {
   data() {
     return {
       msgAlert: "",
-      typeAlert: "warning",
+      typeAlert: "",
       hasCalender: false,
       meal: {
         meal: "",
@@ -111,10 +112,32 @@ export default {
     async storeMeal() {
       try {
         await axios.post("api/calender/week", this.meal);
-        this.msgAlert = "";
+        this.showAlert({ msg: "Calender created!", type: "success" });
+        this.cleanForm();
       } catch (error) {
-        console.log(error);
+        this.showAlert({ msg: error, type: "danger" });
       }
+    },
+    showAlert({ msg, type }) {
+      this.typeAlert = type;
+      this.msgAlert = msg;
+      this.hideAlert();
+    },
+    hideAlert() {
+      setTimeout(() => {
+        this.typeAlert = "";
+        this.msgAlert = "";
+      }, 4000);
+    },
+
+    cleanForm() {
+      this.meal.meal = "";
+      this.meal.day = 0;
+      this.meal.color = "";
+      this.meal.name = "";
+      this.meal.hour = "";
+      this.meal.description = "";
+      this.meal.recipe = "";
     },
   },
 };
