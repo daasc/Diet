@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { mount } from "@vue/test-utils";
-import MenuComponent from "../../components/MenuComponent.vue";
+import MenuComponent from "../../../components/MenuComponent.vue";
 import { nextTick } from "vue";
 
 const makeSut = async () => {

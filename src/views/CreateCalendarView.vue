@@ -1,5 +1,10 @@
 <template>
   <section>
+    <alert-component
+      :msg="msgAlert"
+      v-if="msgAlert"
+      :type="typeAlert"
+    ></alert-component>
     <h1>Create Meal</h1>
     <form action="">
       <label for="week">
@@ -75,11 +80,19 @@
   </section>
 </template>
 <script>
+import { defineAsyncComponent } from "vue";
 import axios from "../utils/axios";
 export default {
   name: "CreateCalendar",
+  components: {
+    AlertComponent: defineAsyncComponent(() =>
+      import("../components/AlertComponent.vue")
+    ),
+  },
   data() {
     return {
+      msgAlert: "",
+      typeAlert: "warning",
       hasCalender: false,
       meal: {
         meal: "",
@@ -98,6 +111,7 @@ export default {
     async storeMeal() {
       try {
         await axios.post("api/calender/week", this.meal);
+        this.msgAlert = "";
       } catch (error) {
         console.log(error);
       }
