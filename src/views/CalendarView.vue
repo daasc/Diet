@@ -116,6 +116,9 @@ section {
   max-height: 100vh;
   overflow: scroll;
 }
+section::-webkit-scrollbar {
+  display: none;
+}
 .description {
   display: flex;
   justify-content: space-between;
