@@ -22,7 +22,7 @@ describe("BoxAlert", () => {
     expect(sut.exists).toBeTruthy();
   });
 
-  it.only("should render a component of type danger ", async () => {
+  it("should render a component of type danger ", async () => {
     const sut = await makeSut();
 
     const dangerClass = sut.find('[data-testid="type"]');
