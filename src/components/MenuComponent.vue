@@ -62,10 +62,10 @@ export default {
   },
   computed: {
     calendarIsActive() {
-      return this.path === "/calendar" || this.$route?.path === "/calendar";
+      return this.$route?.path === "/calendar";
     },
     homeIsActive() {
-      return this.path === "/" || this.$route?.path === "/";
+      return this.$route?.path === "/";
     },
   },
   methods: {

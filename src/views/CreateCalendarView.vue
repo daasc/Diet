@@ -7,7 +7,7 @@
     ></alert-component>
     <h1>Create Meal</h1>
 
-    <form action="">
+    <form method="post" @submit.prevent="storeMeal">
       <label for="week">
         Choose the day
         <select name="week" id="week" v-model="meal.day" required>
@@ -69,14 +69,7 @@
           required
         />
       </label>
-      <button
-        class="button"
-        type="submit"
-        role="button"
-        @click.prevent="storeMeal"
-      >
-        Save
-      </button>
+      <input class="button" type="submit" value="Save" />
     </form>
   </section>
 </template>
