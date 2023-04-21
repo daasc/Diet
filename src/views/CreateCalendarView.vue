@@ -104,7 +104,7 @@ export default {
   methods: {
     async storeMeal() {
       try {
-        await axios.post("api/calender/week", this.meal);
+        await axios.post("calendar", this.meal);
         this.showAlert({ msg: "Calender created!", type: "success" });
         this.cleanForm();
       } catch (error) {

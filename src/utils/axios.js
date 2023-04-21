@@ -1,14 +1,19 @@
 import Axios from "axios";
+const baseUrl = import.meta.env.base_url;
 
 const axios = Axios.create({
-  baseURL: "/",
+  baseURL: baseUrl,
+  headers: {
+    "Content-type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
 });
 
 axios.interceptors.request.use(
   (response) => {
-    /**
-     * you can process config here
-     */
+    const token = localStorage.getItem("token");
+    response.headers.Authorization = token ? `Bearer ${token}` : "";
+
     return response;
   },
   (error) => {
@@ -24,6 +29,11 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
+    if (error.response.status === 401) {
+      localStorage.removeItem("jwt.token");
+
+      window.location("/login");
+    }
     if (error.response && error.response.data) {
       const code = error.response.status;
       const msg = error.response.data.message;
