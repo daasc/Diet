@@ -1,5 +1,10 @@
 <template>
   <div class="login">
+    <alert-component
+      :msg="msgAlert"
+      :type="typeAlert"
+      v-if="msgAlert"
+    ></alert-component>
     <div class="container__login">
       <div class="image__login">
         <img src="../assets/images/login.svg" alt="workout image" />
@@ -63,9 +68,11 @@
   </div>
 </template>
 <script>
+import AlertComponent from "../components/AlertComponent.vue";
 import axios from "../utils/axios.js";
 
 export default {
+  components: { AlertComponent },
   name: "LoginView",
   data() {
     return {
@@ -75,6 +82,8 @@ export default {
         email: "",
         password: "",
       },
+      typeAlert: "",
+      msgAlert: "",
     };
   },
   methods: {
@@ -91,7 +100,7 @@ export default {
         this.setDataUserLocalStorage(userData);
         this.$router.push({ name: "Home" });
       } catch (error) {
-        console.log(error);
+        this.showAlert({ msg: error.response.data.error, type: "danger" });
       }
     },
     async singUp() {
@@ -105,6 +114,17 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    showAlert({ msg, type }) {
+      this.typeAlert = type;
+      this.msgAlert = msg;
+      this.hideAlert();
+    },
+    hideAlert() {
+      setTimeout(() => {
+        this.typeAlert = "";
+        this.msgAlert = "";
+      }, 4000);
     },
   },
 };
