@@ -19,7 +19,7 @@
         <div class="signup__login">
           <form class="login__content" v-if="login">
             <fieldset class="input-box">
-              <input id="email" type="email" required />
+              <input id="email" type="email" required v-model="user.email" />
               <label for="email" placeholder="Email"></label>
             </fieldset>
             <fieldset class="input-box">
@@ -27,31 +27,35 @@
                 id="password"
                 type="password"
                 autocomplete="off"
+                v-model="user.password"
                 required
               />
               <label for="password" placeholder="Password"></label>
             </fieldset>
-            <button class="button">Login</button>
+            <button class="button" @click.prevent="authenticator()">
+              Login
+            </button>
           </form>
           <form class="signup__content" v-if="!login">
             <fieldset class="input-box">
-              <input id="input" type="text" required />
+              <input id="input" type="text" v-model="user.username" required />
               <label for="input" placeholder="Username"></label>
             </fieldset>
             <fieldset class="input-box">
-              <input id="email" type="email" required />
+              <input id="email" type="email" required v-model="user.email" />
               <label for="email" placeholder="Email"></label>
             </fieldset>
             <fieldset class="input-box">
               <input
                 id="password"
                 type="password"
+                v-model="user.password"
                 autocomplete="off"
                 required
               />
               <label for="password" placeholder="Password"></label>
             </fieldset>
-            <button class="button">Sign Up</button>
+            <button class="button" @click="signUp()">Sign Up</button>
           </form>
         </div>
       </div>
@@ -59,12 +63,49 @@
   </div>
 </template>
 <script>
+import axios from "../utils/axios.js";
+
 export default {
   name: "LoginView",
   data() {
     return {
       login: true,
+      user: {
+        username: "",
+        email: "",
+        password: "",
+      },
     };
+  },
+  methods: {
+    setDataUserLocalStorage(userData) {
+      localStorage.setItem("token", JSON.stringify(userData.data.token));
+      localStorage.setItem("user", JSON.stringify(userData.data.data));
+    },
+    async authenticator() {
+      try {
+        const userData = await axios.post("api/user/authenticate", {
+          email: this.user.email,
+          password: this.user.password,
+        });
+        this.setDataUserLocalStorage(userData);
+        this.$router.push({ name: "Home" });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async singUp() {
+      try {
+        const userData = await axios.post("api/user/register", {
+          email: this.user.email,
+          password: this.user.password,
+        });
+        this.setDataUserLocalStorage(userData);
+        this.$router.push({ name: "Home" });
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
