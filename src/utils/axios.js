@@ -29,10 +29,13 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 401) {
-      localStorage.removeItem("jwt.token");
+    if (
+      error.response.status === 401 &&
+      window.location.pathname !== "/login"
+    ) {
+      localStorage.removeItem("token");
 
-      window.location("/login");
+      window.location.replace("/login");
     }
     if (error.response && error.response.data) {
       const code = error.response.status;
